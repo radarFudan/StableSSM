@@ -24,4 +24,4 @@ pytest          # tests
 # sh            # for running bash commands in some tests (linux/macos only)
 
 # Debug
-pkg_resources
+setuptools
