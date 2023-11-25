@@ -7,3 +7,7 @@ Plan:
   5. Prepare some simple test codes so that I know the growth and constant coefficient in terms of the time and space cost.
 3. Implement my stable parameterization individually
 4. Can we construct a hypernetwork and also train it by gradient descent with the constraint from my stability criterion for stable approximation?
+
+Environment preparation:
+1. 
+`pip --default-timeout=1000 install -U -r requirements.txt --index-url https://download.pytorch.org/whl/cu117 `

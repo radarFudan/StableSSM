@@ -1,0 +1,36 @@
+_target_: src.models.seq_classification_module.SeqClassificationLitModule
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.001
+  betas: [0.9, 0.999] # TODO, Not sure
+  eps: 1e-8
+  weight_decay: 0.01
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+  _partial_: true
+  T_max: null
+  eta_min: 0
+
+net:
+  _target_: src.models.recurrent.stablessm.StableSSMModel
+  rec1_size: 256
+  n_layers: 4
+  dropout: 0.2
+  dt: 0.33
+  prenorm: False
+  parameterization: "direct"
+
+encoder:
+  _target_: src.models.encoders.linear.Linear
+  in_size: 1
+  out_size: ${model.net.rec1_size}
+decoder:
+  _target_: src.models.decoders.linear.Linear
+  in_size: ${model.net.rec1_size}
+  out_size: 10
+
+# compile model for faster training with pytorch 2.0
+compile: false
