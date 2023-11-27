@@ -26,7 +26,7 @@ for (( rep=1; rep<=num_repetitions; rep++ )); do
                 trainer.devices=1 \
                 model.net.parameterization="$param" \
                 logger=many_loggers \
-                model.optimizer.lr=$lr \
+                model.optimizer.lr="$lr" \
                 seed=$rep \
                 model.net.n_layers=6 \
                 logger.wandb.project="StableSSM_CIFAR10_SSM_6Layers"

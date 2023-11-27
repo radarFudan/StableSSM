@@ -124,7 +124,7 @@ class SeqClassificationLitModule(LightningModule):
             x, y = batch
         else:
             raise ValueError("Batch size is not 2 or 3")
-        
+
         # x = x.double()
 
         logits = self.forward(x)

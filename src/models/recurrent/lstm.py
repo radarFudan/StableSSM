@@ -9,7 +9,7 @@ class LSTM(nn.Module):
         rec1_size: int = 128,
         activation: str = "linear",
         return_sequences: bool = True,
-        training: bool = True, # currently useless
+        training: bool = True,  # currently useless
     ):
         super().__init__()
 

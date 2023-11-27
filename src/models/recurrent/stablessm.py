@@ -54,7 +54,7 @@ class STABLESSMKernel(nn.Module):
         self.C = nn.Parameter(torch.view_as_real(C))
         self.register("log_dt", log_dt, lr)
 
-        # log_A_real = torch.log(0.5 * torch.ones(H, N // 2)) # Previous intialization of log_A_real
+        # log_A_real = torch.log(0.5 * torch.ones(H, N // 2)) # Previous initialization of log_A_real
         A_weights = 0.5 * torch.ones(H, N // 2)
         A_imag = math.pi * repeat(torch.arange(N // 2), "n -> h n", h=H)
         if self.parameterization == "exp":
@@ -62,7 +62,9 @@ class STABLESSMKernel(nn.Module):
         elif self.parameterization == "softplus":
             log_A_real = torch.log(torch.exp(A_weights) - 1.0)
         elif self.parameterization == "best":
-            log_A_real = torch.sqrt(torch.maximum(1 / A_weights - 0.1, 1e-6 * torch.ones_like(A_weights)))
+            log_A_real = torch.sqrt(
+                torch.maximum(1 / A_weights - 0.1, 1e-6 * torch.ones_like(A_weights))
+            )
         elif self.parameterization == "direct":
             log_A_real = A_weights
         else:

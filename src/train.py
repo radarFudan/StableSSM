@@ -4,11 +4,10 @@ import hydra
 import lightning as L
 import rootutils
 import torch
+import wandb
 from lightning import Callback, LightningDataModule, LightningModule, Trainer
 from lightning.pytorch.loggers import Logger
 from omegaconf import DictConfig
-
-import wandb
 
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 # ------------------------------------------------------------------------------------ #
@@ -68,7 +67,7 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     log.info("Instantiating loggers...")
     logger: List[Logger] = instantiate_loggers(cfg.get("logger"))
 
-    # TODO, filter for the wandb logger and then watch the model 
+    # TODO, filter for the wandb logger and then watch the model
     logger[-1].watch(model, log="all")
 
     log.info(f"Instantiating trainer <{cfg.trainer._target_}>")
