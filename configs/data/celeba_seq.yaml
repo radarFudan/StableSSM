@@ -1,0 +1,7 @@
+_target_: src.data.celeba_seq_datamodule.CelebASeqDataModule
+data_dir: ${paths.data_dir}
+batch_size: 128 # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
+train_val_test_split: [182_339, 10_130, 10_130]
+num_workers: 8
+pin_memory: False
+seed: 42
