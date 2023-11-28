@@ -178,7 +178,7 @@ class StableSSMModel(nn.Module):
         dt=0.33,
         prenorm=False,
         parameterization="exp",  # this is a kernel_arg
-        return_seq:bool="False",
+        return_seq: bool = "False",
     ):
         super().__init__()
 
@@ -227,11 +227,11 @@ class StableSSMModel(nn.Module):
                 # Postnorm
                 x = norm(x.transpose(-1, -2)).transpose(-1, -2)
 
-        x = x.transpose(-1, -2) # (B, d_model, L) -> (B, L, d_model)
+        x = x.transpose(-1, -2)  # (B, d_model, L) -> (B, L, d_model)
 
         # Pooling: average pooling over the sequence length
         if not self.return_seq:
-            x = x.mean(dim=1) # This is actually a linear convolution layer... 
+            x = x.mean(dim=1)  # This is actually a linear convolution layer...
         else:
             x = x
 

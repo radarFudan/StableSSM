@@ -1,6 +1,5 @@
 <div align="center">
 
-
 # StableSSM
 
 <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
@@ -14,7 +13,7 @@
 
 ## Description
 
-Use stable reparameterizations to improve the long-term memory learning and optimization stability. 
+Use stable reparameterizations to improve the long-term memory learning and optimization stability.
 
 ## Installation
 
