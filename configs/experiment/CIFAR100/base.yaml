@@ -1,0 +1,33 @@
+# @package _global_
+defaults:
+  - override /data: cifar100_seq
+  - override /callbacks: default.yaml
+  - override /trainer: gpu.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["cifar100_seq"]
+
+seed: 12345
+
+trainer:
+  min_epochs: 10
+  max_epochs: 10
+  # gradient_clip_val: 0.5
+
+logger:
+  wandb:
+    name: "${task_name}-D${model.net.rec1_size}"
+    tags: ${tags}
+    group: "cifar100_seq"
+    project: "StableSSM_CIFAR100"
+  aim:
+    experiment: "cifar100_seq"
+
+callbacks:
+  model_checkpoint:
+    monitor: "val/acc"
+    mode: "max"
+
+optimized_metric: "val/acc"
