@@ -52,6 +52,7 @@ class LFDataModule(LightningDataModule):
         batch_size: int = 256,
         num_workers: int = 0,
         pin_memory: bool = False,
+        seed: int = 42,
     ):
         super().__init__()
 
@@ -73,7 +74,7 @@ class LFDataModule(LightningDataModule):
         self.dt = dt
         self.rho_name = rho_name
         self.Gaussian_input = Gaussian_input
-        self.Generator_seed = 42
+        self.seed = seed
 
         # Prepare the dictionary of rho functions
         self.rhos = {
@@ -127,14 +128,16 @@ class LFDataModule(LightningDataModule):
             # print("In lf_datamodule.py, inputs.shape", inputs.shape)
             # print("In lf_datamodule.py, outputs.shape", outputs.shape)
 
-            inputs_tensor = torch.from_numpy(inputs.copy()).double()
-            outputs_tensor = torch.from_numpy(outputs.copy()).double()
+            # inputs_tensor = torch.from_numpy(inputs.copy()).double()
+            # outputs_tensor = torch.from_numpy(outputs.copy()).double()
+            inputs_tensor = torch.from_numpy(inputs.copy()).float()
+            outputs_tensor = torch.from_numpy(outputs.copy()).float()
             dataset = torch.utils.data.TensorDataset(inputs_tensor, outputs_tensor)
 
             self.data_train, self.data_val, self.data_test = random_split(
                 dataset=dataset,
                 lengths=self.hparams.train_val_test_split,
-                generator=torch.Generator().manual_seed(self.Generator_seed),
+                generator=torch.Generator().manual_seed(self.seed),
             )
 
     def train_dataloader(self):

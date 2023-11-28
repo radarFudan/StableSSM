@@ -17,6 +17,7 @@ model:
     n_layers: 1
     dropout: 0.0
     parameterization: "direct"
+    return_seq: True
   encoder:
     _target_: src.models.encoders.linear.Linear
     in_size: 1
@@ -24,7 +25,7 @@ model:
   decoder:
     _target_: src.models.decoders.linear.Linear
     in_size: ${model.net.rec1_size}
-    out_size: 10
+    out_size: 1
 
 data:
   batch_size: 128

@@ -1,6 +1,6 @@
 Plan:
 
-0. Add the synthetic task of linear functional to the dataset. Make it a sequence-to-sequence prediction. 
+0. Add the synthetic task of linear functional to the dataset. 
     Check the code for LF and CIFAR100
 1. This is going to be the code release for my StableSSM draft.
 2. Collect the state of the art implementation of linear RNN first.
@@ -12,5 +12,4 @@ Plan:
 8. Can we construct a hypernetwork and also train it by gradient descent with the constraint from my stability criterion for stable approximation?
 
 Environment preparation:
-1\.
-`pip --default-timeout=1000 install -U -r requirements.txt --index-url https://download.pytorch.org/whl/cu117 `
+``

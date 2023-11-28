@@ -27,7 +27,10 @@ logger:
 
 callbacks:
   model_checkpoint:
-    monitor: "val/acc"
-    mode: "max"
+    monitor: "val/loss"
+    mode: "min"
+  early_stopping:
+    monitor: "val/loss"
+    mode: "min"
 
-optimized_metric: "val/acc"
+optimized_metric: "val/loss"

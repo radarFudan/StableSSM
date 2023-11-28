@@ -22,6 +22,7 @@ net:
   dt: 0.33
   prenorm: False
   parameterization: "direct"
+  return_seq: False
 
 encoder:
   _target_: src.models.encoders.linear.Linear

@@ -6,8 +6,6 @@ from lightning import LightningModule
 from lightning.pytorch.utilities import grad_norm
 from torchmetrics import MaxMetric, MeanMetric
 
-from src.utils.temporally_weighted_error import twe_MSE
-
 
 class LFLitModule(LightningModule):
     """Example of LightningModule for LF classification.
@@ -31,6 +29,7 @@ class LFLitModule(LightningModule):
         decoder: torch.nn.Module,
         optimizer: torch.optim.Optimizer,
         scheduler: torch.optim.lr_scheduler,
+        compile: bool,
     ):
         super().__init__()
 
@@ -44,7 +43,6 @@ class LFLitModule(LightningModule):
 
         # loss function
         self.criterion = torch.nn.MSELoss()
-        # self.criterion = partial(twe_MSE, criterion=torch.nn.MSELoss(), p=2)
 
         # for averaging loss across batches
         self.train_loss = MeanMetric()
@@ -108,6 +106,18 @@ class LFLitModule(LightningModule):
 
     def on_test_epoch_end(self):
         pass
+
+    def setup(self, stage: str) -> None:
+        """Lightning hook that is called at the beginning of fit (train + validate), validate,
+        test, or predict.
+
+        This is a good hook when you need to build models dynamically or adjust something about
+        them. This hook is called on every process when using DDP.
+
+        :param stage: Either `"fit"`, `"validate"`, `"test"`, or `"predict"`.
+        """
+        if self.hparams.compile and stage == "fit":
+            self.net = torch.compile(self.net)
 
     def configure_optimizers(self):
         """Choose what optimizers and learning-rate schedulers to use in your optimization.
