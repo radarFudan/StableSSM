@@ -1,0 +1,36 @@
+# @package _global_
+defaults:
+  - override /data: attn
+  - override /callbacks: default.yaml
+  - override /trainer: gpu.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["attn"]
+
+seed: 12345
+
+trainer:
+  min_epochs: 10
+  max_epochs: 10
+  # gradient_clip_val: 0.5
+
+logger:
+  wandb:
+    name: "${task_name}-D${model.net.rec1_size}"
+    tags: ${tags}
+    group: "attn"
+    project: "StableSSM_Attn"
+  aim:
+    experiment: "attn"
+
+callbacks:
+  model_checkpoint:
+    monitor: "val/loss"
+    mode: "min"
+  early_stopping:
+    monitor: "val/loss"
+    mode: "min"
+
+optimized_metric: "val/loss"
