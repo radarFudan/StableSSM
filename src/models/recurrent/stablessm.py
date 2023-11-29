@@ -178,7 +178,7 @@ class StableSSMModel(nn.Module):
         dt=0.33,
         prenorm=False,
         parameterization="exp",  # this is a kernel_arg
-        return_seq: bool = "False",
+        return_seq: bool =False,
     ):
         super().__init__()
 
