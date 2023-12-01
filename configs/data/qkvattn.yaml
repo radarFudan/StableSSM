@@ -1,0 +1,10 @@
+_target_: src.data.qkvattn_datamodule.QKVAttnDataModule
+data_dir: ${paths.data_dir}
+batch_size: 128
+seq_length: 100
+input_dim: 1
+train_val_test_split: [55_000, 5_000, 10_000]
+# train_val_test_split: [600, 50, 50]
+num_workers: 16
+pin_memory: False
+seed: 42
