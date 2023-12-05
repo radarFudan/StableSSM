@@ -60,7 +60,7 @@ class STABLESSMKernel(nn.Module):
         if self.parameterization == "exp":
             log_A_real = torch.log(A_weights)
         elif self.parameterization == "softplus":
-            log_A_real = torch.log(torch.exp(A_weights) - 1.0)
+            log_A_real = torch.log(torch.expm1(A_weights) - 1.0)
         elif self.parameterization == "best":
             log_A_real = torch.sqrt(
                 torch.maximum(1 / A_weights - 0.1, 1e-6 * torch.ones_like(A_weights))
