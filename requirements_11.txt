@@ -1,5 +1,5 @@
 # --------- pytorch --------- #
-torch==2.0.0+cu117
+torch==2.1.1
 torchvision==0.15.0
 torchaudio==2.1.1
 lightning>=2.0.0
