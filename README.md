@@ -15,6 +15,28 @@
 
 Use stable reparameterizations to improve the long-term memory learning and optimization stability.
 
+### SSMs
+
+The state-space models we are talking about refer to the linear RNNs with layer-wise nonlinear activations.
+
+Discrete-time case:
+$$h_{k+1} = \Lambda h_k+Ux_k+b$$
+
+$$y_k = c^\top \sigma(h_k)$$
+
+Continuous-time case:
+$$\frac{dh_{t}}{dt} = \Lambda h_t+Ux_t+b$$
+
+$$y_t = c^\top \sigma(h_t)$$
+
+### Stable reparameterization
+
+Let $W$ be the trainable parameters. 
+No reparameterization is unstable parameterization
+$$\Lambda = W.$$
+Stable reparameterization:
+$$\Lambda = -\exp(W), -\log(1+\exp(W)).$$
+
 ## Installation
 
 #### Pip
