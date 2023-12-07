@@ -50,26 +50,42 @@ conda env create -f environment.yaml -n StableSSM
 conda activate StableSSM
 ```
 
-## How to run
+## Refs
 
-Train model with default configuration
+### Curse of memory phenomneon / definition of memory functions / concept of stable approximation
 
-```bash
-# train on CPU
-python src/train.py trainer=cpu
-
-# train on GPU
-python src/train.py trainer=gpu
+```bibtex
+@inproceedings{
+    wang2023statespace,
+    title={State-space models with layer-wise nonlinearity are universal approximators with exponential decaying memory},
+    author={Shida Wang and Beichen Xue},
+    booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+    year={2023},
+    url={https://openreview.net/forum?id=i0OmcF14Kf}
+}
+@misc{wang2023stablessm,
+    title={StableSSM: Alleviating the Curse of Memory in State-space Models through Stable Reparameterization},
+    author={Shida Wang and Qianxiao Li},
+    year={2023},
+    eprint={2311.14495},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
 ```
 
-Train model with chosen experiment configuration from [configs/experiment/](configs/experiment/)
+### Survey on sequence modelling from approximation perspective
 
-```bash
-python src/train.py experiment=experiment_name.yaml
-```
-
-You can override any parameter from command line like this
-
-```bash
-python src/train.py trainer.max_epochs=20 data.batch_size=64
+```bibtex
+@Article{JML-2-1,
+    author = {Haotian Jiang and Qianxiao Li and Zhong Li and Shida Wang},
+    title = {A Brief Survey on the Approximation Theory for Sequence Modelling},
+    journal = {Journal of Machine Learning},
+    year = {2023},
+    volume = {2},
+    number = {1},
+    pages = {1--30},
+    abstract = {We survey current developments in the approximation theory of sequence modelling in machine learning. Particular emphasis is placed on classifying existing results for various model architectures through the lens of classical approximation paradigms, and the insights one can gain from these results. We also outline some future research directions towards building a theory of sequence modelling.},
+    issn = {2790-2048},
+    doi = {https://doi.org/10.4208/jml.221221},
+    url = {http://global-sci.org/intro/article_detail/jml/21511.html} }
 ```
