@@ -29,3 +29,5 @@ setuptools
 einops
 
 tensorboard
+causal-conv1d
+mamba-ssm
