@@ -35,7 +35,7 @@ Let $W$ be the trainable parameters.
 No reparameterization is unstable parameterization
 $$\Lambda = W.$$
 Stable reparameterization:
-$$\Lambda = -exp(W), -log(1+exp(W)).$$
+$$\Lambda = -e^W, -\log(1+e^W).$$
 
 ## Installation
 
