@@ -127,8 +127,9 @@ class CelebASeqDataModule(LightningDataModule):
         Do not use it to assign state (self.x = y).
         """
 
-        CelebA(self.hparams.data_dir, train=True, download=True)
-        CelebA(self.hparams.data_dir, train=False, download=True)
+        CelebA(self.hparams.data_dir, split="train", download=True)
+        CelebA(self.hparams.data_dir, split="valid", download=True)
+        CelebA(self.hparams.data_dir, split="test", download=True)
 
     def setup(self, stage: Optional[str] = None) -> None:
         """Load data. Set variables: `self.data_train`, `self.data_val`, `self.data_test`.
@@ -150,9 +151,10 @@ class CelebASeqDataModule(LightningDataModule):
 
         # load and split datasets only if not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
-            trainset = CelebA(self.hparams.data_dir, train=True, transform=self.transforms)
-            testset = CelebA(self.hparams.data_dir, train=False, transform=self.transforms)
-            dataset = ConcatDataset(datasets=[trainset, testset])
+            trainset = CelebA(self.hparams.data_dir, split="train", download=True)
+            validset = CelebA(self.hparams.data_dir, split="valid", download=True)
+            testset = CelebA(self.hparams.data_dir, split="test", download=True)
+            dataset = ConcatDataset(datasets=[trainset, validset, testset])
             self.data_train, self.data_val, self.data_test = random_split(
                 dataset=dataset,
                 lengths=self.hparams.train_val_test_split,
